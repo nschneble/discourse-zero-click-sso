@@ -1,4 +1,4 @@
-# **Plugin Name** Plugin
+# **Discourse Zero Click Sso** Plugin
 
 **Plugin Summary**
 
