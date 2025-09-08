@@ -1,11 +1,11 @@
 # frozen_string_literal: true
 
 # name: discourse-zero-click-sso
-# about: TODO
-# meta_topic_id: TODO
+# about: Zero click SSO auth plugin for Discourse forums.
+# meta_topic_id: TBD
 # version: 0.0.1
-# authors: Discourse
-# url: TODO
+# authors: Nick Schneble
+# url: TBD
 # required_version: 2.7.0
 
 enabled_site_setting :discourse_zero_click_sso_enabled
