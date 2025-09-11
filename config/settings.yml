@@ -2,3 +2,11 @@ discourse_zero_click_sso:
   discourse_zero_click_sso_enabled:
     default: false
     client: true
+  show_excitement:
+    default: false
+    client: true
+  excitement_level:
+    default: 1
+    min: 1
+    max: 11
+    client: true
