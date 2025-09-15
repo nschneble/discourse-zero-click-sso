@@ -13,7 +13,7 @@ export default class ExcitementConnector extends Component {
 
   <template>
     {{#if this.siteSettings.show_excitement}}
-      <p>I'm very excited about zero click SSO auth{{this.exclamations}}</p>
+      <p>I'm very excited about zero-click SSO{{this.exclamations}}</p>
     {{/if}}
   </template>
 }

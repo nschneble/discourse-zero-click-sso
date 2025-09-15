@@ -1,5 +1,5 @@
-discourse_zero_click_sso:
-  discourse_zero_click_sso_enabled:
+zero_click_sso:
+  zero_click_sso_enabled:
     default: false
     client: true
   show_excitement:

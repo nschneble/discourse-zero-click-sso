@@ -1,5 +1,5 @@
 en:
   site_settings:
-    discourse_zero_click_sso_enabled: "Enable zero click SSO auth plugin."
+    zero_click_sso_enabled: "Enable zero-click SSO."
     show_excitement: "Do you want to show your excitement?"
     excitement_level: "How excited are you!?"

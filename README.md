@@ -1,15 +1,15 @@
-# **Discourse Zero Click SSO** Plugin
+# Discourse Zero-Click SSO Plugin
 
 > _Why click once when you don't have to click at all?_
 > 
 > – Wise Coding Sage
 
-This plugin allows users to be logged in automatically when they first visit a Discourse forum.
+This plugin ✨ automagically ✨ logs in users to Discourse forums.
 
-## How to use this plugin!
+## How do I use this plugin?
 
 1. Enable the plugin (easy start)
-2. Disable local login on your Discourse forum (cool, cool)
+2. Disable local-login on your Discourse forum (cool, cool)
 3. Configure a single SSO source (gotta pick)
 
 ### Example
