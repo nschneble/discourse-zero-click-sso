@@ -23,23 +23,30 @@ after_initialize do
   require_dependency "application_controller"
   require_dependency "session_controller"
 
-  # only performs zero-click SSO when all conditions are met
   add_to_class(:application_controller, :perform_zero_click_sso_if_enabled) do
     return if current_user.present?
     return if ZeroClickSSO::Cookies.opted_out?(cookies)
 
+    # only performs zero-click SSO when all conditions are met
     return unless ZeroClickSSO::Auth.configured_properly?
+    return unless ZeroClickSSO::Auth.no_prompt? || ZeroClickSSO::Auth.try_em_all?
     return unless ZeroClickSSO::Requests.valid?(request)
     return unless ZeroClickSSO::Requests.safe_path?(request)
 
+    # puts in a retry cooldown after we attempt to zero-click SSO once
+    ZeroClickSSO::Cookies.opt_out(cookies, ttl: 1.hour)
+
     base_url = ZeroClickSSO::Requests.base_url_for_auth(request)
-    path = Discourse.base_path
+    path = Discourse.base_path.presence || "/"
 
-    provider = ZeroClickSSO::Auth.provider_name
-    origin = "#{base_url}#{path}"
-    auth_url = "#{origin}/auth/#{provider}?prompt=none&origin=#{CGI.escape(origin)}"
+    auth_params = { origin: File.join(base_url, request.fullpath) }
+    auth_params[:prompt] = "none" if ZeroClickSSO::Auth.no_prompt?
 
-    redirect_to auth_url and return
+    auth_uri = URI(base_url)
+    auth_uri.path = File.join(path, "auth", ZeroClickSSO::Auth.provider_name)
+    auth_uri.query = URI.encode_www_form(auth_params)
+
+    redirect_to auth_uri.to_s and return
   end
 
   ::ApplicationController.before_action :perform_zero_click_sso_if_enabled

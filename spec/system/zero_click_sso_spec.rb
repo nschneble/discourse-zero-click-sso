@@ -7,8 +7,9 @@ RSpec.describe "Zero-Click SSO", type: :system do
     SiteSetting.enable_local_logins = false
     SiteSetting.zero_click_sso_enabled = true
 
-    # pretends we've got exactly one SSO provider configured
-    allow(Discourse).to receive(:enabled_authenticators).and_return([OmniAuth::Strategies::OpenIDConnect.new(nil, {})])
+    # Mock enabled authenticators to only include a single provider
+    github_authenticator = instance_double("Auth::Authenticator", name: "github")
+    allow(Discourse).to receive(:enabled_authenticators).and_return([github_authenticator])
   end
 
   it "does nothing when a user is already logged in" do

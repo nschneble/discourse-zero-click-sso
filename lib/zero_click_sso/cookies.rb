@@ -21,7 +21,7 @@ module ::ZeroClickSSO
     end
 
     def self.clear(cookies)
-      cookies.delete(COOKIE_NAME, path: COOKIE_PATH) if self.opted_out?(cookies)
+      cookies.delete(COOKIE_NAME, path: COOKIE_PATH) if opted_out?(cookies)
     end
   end
 end

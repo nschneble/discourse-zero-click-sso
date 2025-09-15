@@ -13,14 +13,15 @@ module ::ZeroClickSSO
 
     def self.safe_path?(request)
       PATHS.none? do |path|
-        request.path == "#{BASE_PATH}/#{path}" || request.path.start_with?("#{BASE_PATH}/#{path}/")
+        request.path == "#{BASE_PATH}/#{path}" ||
+          request.path.start_with?("#{BASE_PATH}/#{path}/")
       end
     end
 
     def self.base_url_for_auth(request)
       # this allows the zero-click auth flow to work in both dev and prod
       uri = URI.parse(request.base_url)
-      uri.port = ENV.fetch("DISCOURSE_DEV_RAILS_PORT", 3000).to_i if Rails.env.development?
+      uri.port = ENV.fetch("DEV_RAILS_PORT", 3000).to_i if Rails.env.development?
       uri.to_s
     end
   end
