@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 RSpec.describe "Zero-Click SSO", type: :system do
-  fab!(:user) { Fabricate(:user) }
+  fab!(:user)
 
   before do
     SiteSetting.enable_local_logins = false
