@@ -9,6 +9,10 @@
 
 enabled_site_setting :zero_click_sso_enabled
 
+ActiveSupport::Inflector.inflections(:en) do |inflect|
+  inflect.acronym "SSO"
+end
+
 module ::ZeroClickSSO
   PLUGIN_NAME = "zero-click-sso"
 end
