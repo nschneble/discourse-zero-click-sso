@@ -17,8 +17,3 @@ export default class ExcitementConnector extends Component {
     {{/if}}
   </template>
 }
-
-
-
-
-
