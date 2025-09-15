@@ -9,11 +9,7 @@
 
 enabled_site_setting :zero_click_sso_enabled
 
-ActiveSupport::Inflector.inflections(:en) do |inflect|
-  inflect.acronym "SSO"
-end
-
-module ::ZeroClickSSO
+module ::ZeroClickSso
   PLUGIN_NAME = "zero-click-sso"
 end
 
@@ -29,25 +25,25 @@ after_initialize do
 
   add_to_class(:application_controller, :perform_zero_click_sso_if_enabled) do
     return if current_user.present?
-    return if ZeroClickSSO::Cookies.opted_out?(cookies)
+    return if ZeroClickSso::Cookies.opted_out?(cookies)
 
     # only performs zero-click SSO when all conditions are met
-    return unless ZeroClickSSO::Auth.configured_properly?
-    return unless ZeroClickSSO::Auth.no_prompt? || ZeroClickSSO::Auth.try_em_all?
-    return unless ZeroClickSSO::Requests.valid?(request)
-    return unless ZeroClickSSO::Requests.safe_path?(request)
+    return unless ZeroClickSso::Auth.configured_properly?
+    return unless ZeroClickSso::Auth.no_prompt? || ZeroClickSso::Auth.try_em_all?
+    return unless ZeroClickSso::Requests.valid?(request)
+    return unless ZeroClickSso::Requests.safe_path?(request)
 
     # puts in a retry cooldown after we attempt to zero-click SSO once
-    ZeroClickSSO::Cookies.opt_out(cookies, ttl: 1.hour)
+    ZeroClickSso::Cookies.opt_out(cookies, ttl: 1.hour)
 
-    base_url = ZeroClickSSO::Requests.base_url_for_auth(request)
+    base_url = ZeroClickSso::Requests.base_url_for_auth(request)
     path = Discourse.base_path.presence || "/"
 
     auth_params = { origin: File.join(base_url, request.fullpath) }
-    auth_params[:prompt] = "none" if ZeroClickSSO::Auth.no_prompt?
+    auth_params[:prompt] = "none" if ZeroClickSso::Auth.no_prompt?
 
     auth_uri = URI(base_url)
-    auth_uri.path = File.join(path, "auth", ZeroClickSSO::Auth.provider_name)
+    auth_uri.path = File.join(path, "auth", ZeroClickSso::Auth.provider_name)
     auth_uri.query = URI.encode_www_form(auth_params)
 
     redirect_to auth_uri.to_s and return
@@ -57,7 +53,7 @@ after_initialize do
 
   # skips any zero-click SSO attempts for a short while after logging out
   add_to_class(:session_controller, :opt_out_zero_click_sso) do
-    ZeroClickSSO::Cookies.opt_out(cookies, ttl: 1.hour)
+    ZeroClickSso::Cookies.opt_out(cookies, ttl: 1.hour)
   end
 
   ::SessionController.after_action :opt_out_zero_click_sso, only: :destroy

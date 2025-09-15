@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-module ::ZeroClickSSO
+module ::ZeroClickSso
   module Cookies
     COOKIE_NAME = :discourse_zero_click_sso
     COOKIE_PATH = "/"

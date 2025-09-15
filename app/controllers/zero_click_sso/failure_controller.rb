@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-module ::ZeroClickSSO
+module ::ZeroClickSso
   class FailureController < ::ApplicationController
     requires_plugin PLUGIN_NAME
 

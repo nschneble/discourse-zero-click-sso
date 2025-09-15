@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-module ::ZeroClickSSO
+module ::ZeroClickSso
   BASE_PATH = Discourse.base_path.presence || ""
   PATHS =  %w[admin auth login logout rails/active_storage zero_click_sso]
 

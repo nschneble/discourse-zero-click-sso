@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-module ::ZeroClickSSO
+module ::ZeroClickSso
   module Auth
     # names match Discourse authenticators' names
     NO_PROMPT_AUTHENTICATORS = %w[
