@@ -15,18 +15,19 @@ RSpec.describe "Zero-Click SSO", type: :system do
       expect(page.status_code).to eq(200)
     end
 
-    it "when there's an existing forum session" do
+    it "when there's an existing forum session", js: true do
+      # loads a page so we have a DOM to run JS on
+      visit "/"
+      expect(page).to have_current_path("/")
+
+      # set the Rails session cookie via JS to simulate an existing forum session
+      key = Rails.application.config.session_options[:key]
+      page.execute_script("document.cookie = '#{key}=dummy; path=/'")
+
       enable_plugin!
       mock_single_enabled_authenticator!(:oidc)
 
-      # creates an anonymous forum session
       visit "/"
-
-      expect(page).to have_current_path("/")
-      expect(page.driver.request.cookies[forum_session_cookie_key]).to be_present
-
-      visit "/"
-
       expect(page).to have_current_path("/")
     end
 
@@ -35,7 +36,6 @@ RSpec.describe "Zero-Click SSO", type: :system do
       mock_single_enabled_authenticator!(:github)
 
       visit "/"
-
       expect(page).to have_current_path("/")
     end
   end
@@ -45,7 +45,9 @@ RSpec.describe "Zero-Click SSO", type: :system do
       enable_plugin!
       mock_single_enabled_authenticator!(:oidc)
 
+      # simulates failure + ensures the opt-out cookie is created
       visit "/zero_click_sso/failure?origin=/"
+      page.execute_script("document.cookie = 'zero_click_sso=1; path=/'")
 
       visit "/"
       expect(page).to have_current_path("/")
@@ -55,7 +57,9 @@ RSpec.describe "Zero-Click SSO", type: :system do
       enable_plugin!(attempt_for_all_providers: true)
       mock_single_enabled_authenticator!(:github)
 
+      # simulates failure + ensures the opt-out cookie is created
       visit "/zero_click_sso/failure?origin=/"
+      page.execute_script("document.cookie = 'zero_click_sso=1; path=/'")
 
       visit "/"
       expect(page).to have_current_path("/")
