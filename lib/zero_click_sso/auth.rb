@@ -30,7 +30,7 @@ module ::ZeroClickSso
     end
 
     def self.provider_name
-      Discourse.enabled_authenticators.first&.name
+      Discourse.enabled_authenticators.first&.name&.to_s
     end
 
     def self.no_prompt?
