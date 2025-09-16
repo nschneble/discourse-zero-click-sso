@@ -3,7 +3,7 @@
 require_relative "../plugin_helper"
 
 RSpec.describe "Zero-Click SSO", type: :system do
-  context "plugin does nothing" do
+  context "when the plugin does nothing" do
     it "for logged-in users" do
       enable_plugin!
       mock_single_enabled_authenticator!(:oidc)
@@ -40,7 +40,7 @@ RSpec.describe "Zero-Click SSO", type: :system do
     end
   end
 
-  context "plugin fails" do
+  context "when the plugin fails" do
     it "with a silent provider" do
       enable_plugin!
       mock_single_enabled_authenticator!(:oidc)
