@@ -2,7 +2,7 @@
 
 module ::ZeroClickSso
   module Cookies
-    COOKIE_NAME = :discourse_zero_click_sso
+    COOKIE_NAME = :zero_click_sso
     COOKIE_PATH = "/"
 
     def self.opt_out(cookies, ttl: 1.hour)
@@ -22,6 +22,11 @@ module ::ZeroClickSso
 
     def self.clear(cookies)
       cookies.delete(COOKIE_NAME, path: COOKIE_PATH) if opted_out?(cookies)
+    end
+
+    def self.session?(cookies)
+      session_key = Rails.application.config.session_options[:key]
+      cookies[session_key].present?
     end
   end
 end

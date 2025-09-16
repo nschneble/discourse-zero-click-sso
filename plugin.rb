@@ -24,7 +24,7 @@ after_initialize do
   require_dependency "session_controller"
 
   add_to_class(:application_controller, :perform_zero_click_sso_if_enabled) do
-    return if current_user.present?
+    return if current_user.present? || ZeroClickSso::Cookies.session?(cookies)
     return if ZeroClickSso::Cookies.opted_out?(cookies)
 
     # only performs zero-click SSO when all conditions are met
