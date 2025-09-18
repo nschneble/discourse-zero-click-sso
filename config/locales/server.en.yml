@@ -1,4 +1,4 @@
 en:
   site_settings:
     zero_click_sso_enabled: "Enable zero-click SSO for silent providers."
-    zero_click_sso_enabled_for_noisy_providers: "Enable zero-click SSO for `noisy` providers as well. These providers could shown authentication UIs. Enabling this may in fact require more than zero clicks. (We tried!)"
+    zero_click_sso_enabled_for_noisy_providers: "Enable zero-click SSO for `noisy` providers as well. These providers could shown authentication UIs. Enabling this may in fact require more than zero clicks."
