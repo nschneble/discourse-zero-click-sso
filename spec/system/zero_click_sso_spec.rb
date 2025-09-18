@@ -31,8 +31,8 @@ RSpec.describe "Zero-Click SSO", type: :system do
       expect(page).to have_current_path("/")
     end
 
-    it "with a non-silent provider and attempt_for_all_providers disabled" do
-      enable_plugin!(attempt_for_all_providers: false)
+    it "with a non-silent provider and enable_for_noisy_providers disabled" do
+      enable_plugin!(enable_for_noisy_providers: false)
       mock_single_enabled_authenticator!(:github)
 
       visit "/"
@@ -53,8 +53,8 @@ RSpec.describe "Zero-Click SSO", type: :system do
       expect(page).to have_current_path("/")
     end
 
-    it "with a non-silent provider and attempt_for_all_providers enabled" do
-      enable_plugin!(attempt_for_all_providers: true)
+    it "with a non-silent provider and enable_for_noisy_providers enabled" do
+      enable_plugin!(enable_for_noisy_providers: true)
       mock_single_enabled_authenticator!(:github)
 
       # simulates failure + ensures the opt-out cookie is created
