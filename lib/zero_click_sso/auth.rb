@@ -38,7 +38,7 @@ module ::ZeroClickSso
     end
 
     def self.try_em_all?
-      SiteSetting.attempt_zero_click_sso_for_all_providers
+      SiteSetting.zero_click_sso_enabled_for_noisy_providers
     end
   end
 end
