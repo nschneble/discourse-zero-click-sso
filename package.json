@@ -5,6 +5,8 @@
     "ember-template-lint": "7.7.0",
     "eslint": "9.27.0",
     "prettier": "3.5.3",
+    "prettier-plugin-ember-template-tag": "^2.1.0",
+    "prettier-plugin-tailwindcss": "^0.6.14",
     "stylelint": "16.19.1"
   },
   "engines": {

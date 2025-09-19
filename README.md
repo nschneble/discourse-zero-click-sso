@@ -1,7 +1,7 @@
 # Discourse Zero-Click SSO Plugin
 
 > _Why click once when you don't have to click at all?_
-> 
+>
 > – Wise Coding Sage
 
 This plugin ✨ automagically ✨ logs in users to Discourse forums.
