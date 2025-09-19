@@ -39,7 +39,6 @@ export default RouteTemplate(
                     "zero_click_sso.admin.attributes.plugin_enabled"
                   }}</td>
               </tr>
-              {{! template-lint-disable-next-line simple-unless}}
               {{#if (and (not @model.no_prompt) @model.single_sso)}}
                 <tr>
                   <td>{{statusLabel @model.attempt_for_all_providers}}</td>
