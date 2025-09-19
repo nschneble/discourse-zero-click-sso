@@ -7,7 +7,7 @@ import { i18n } from "discourse-i18n";
 
 function statusLabel(value) {
   return htmlSafe(
-    `<span class="zero-click-sso-status-badge ${value ? "good-value" : "bad-value"}">${
+    `<span class="zero-click-sso-status-badge ${value ? "zero-click-sso-good-value" : "zero-click-sso-bad-value"}">${
       value
         ? i18n("zero_click_sso.admin.good")
         : i18n("zero_click_sso.admin.bad")
@@ -70,18 +70,18 @@ export default RouteTemplate(
             )
           }}
             {{#if (or @model.no_prompt @model.attempt_for_all_providers)}}
-              <p class="ready">{{i18n
+              <p class="zero-click-sso-ready">{{i18n
                   "zero_click_sso.admin.info.ready"
                   provider=@model.provider
                 }}</p>
             {{else}}
-              <p class="nearly-ready">{{i18n
+              <p class="zero-click-sso-nearly-ready">{{i18n
                   "zero_click_sso.admin.info.nearly_ready"
                   provider=@model.provider
                 }}</p>
             {{/if}}
           {{else}}
-            <p class="not-ready">{{i18n
+            <p class="zero-click-sso-not-ready">{{i18n
                 "zero_click_sso.admin.info.not_ready"
               }}</p>
           {{/if}}
