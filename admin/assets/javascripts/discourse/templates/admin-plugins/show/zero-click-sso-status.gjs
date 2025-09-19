@@ -1,16 +1,16 @@
+import { htmlSafe } from "@ember/template";
 import RouteTemplate from "ember-route-template";
+import { and, not, or } from "truth-helpers";
 import DBreadcrumbsItem from "discourse/components/d-breadcrumbs-item";
 import DPageSubheader from "discourse/components/d-page-subheader";
-import { htmlSafe } from "@ember/template";
 import { i18n } from "discourse-i18n";
-import { and, not, or } from "truth-helpers";
 
 function statusLabel(value) {
   return htmlSafe(
     `<span class="zero-click-sso-status-badge ${value ? "good-value" : "bad-value"}">${
       value
-        ? I18n.t("zero_click_sso.admin.good")
-        : I18n.t("zero_click_sso.admin.bad")
+        ? i18n("zero_click_sso.admin.good")
+        : i18n("zero_click_sso.admin.bad")
     }</span>`
   );
 }
