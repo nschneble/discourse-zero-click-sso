@@ -1,0 +1,39 @@
+.zero-click-sso-status-attributes td {
+  padding-top: 1rem !important;
+  padding-bottom: 1rem !important;
+}
+
+.zero-click-sso-status-badge {
+  padding: 0.5rem 1rem;
+  border-radius: 0.75rem;
+}
+
+.good-value {
+  background-color: darkgreen;
+}
+
+.bad-value {
+  background-color: darkred;
+}
+
+.zero-click-sso-info {
+  margin: 2rem !important;
+}
+
+.ready {
+  background-color: darkgreen;
+  padding: 1rem !important;
+  border-radius: 0.75rem;
+}
+
+.nearly-ready {
+  background-color: darkgoldenrod;
+  padding: 1rem !important;
+  border-radius: 0.75rem;
+}
+
+.not-ready {
+  background-color: darkred;
+  padding: 1rem !important;
+  border-radius: 0.75rem;
+}

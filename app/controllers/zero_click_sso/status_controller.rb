@@ -7,7 +7,7 @@ module ::ZeroClickSso
     skip_before_action :check_xhr, only: :show
 
     def show
-      authenticators = Discourse.enabled_authenticators.map(&:name)
+      authenticators = Discourse.enabled_authenticators.map(&:display_name)
 
       render json: {
         plugin_enabled: SiteSetting.zero_click_sso_enabled,

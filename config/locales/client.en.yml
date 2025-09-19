@@ -6,5 +6,22 @@ en:
           zero_click_sso: "Zero-Click SSO"
   js:
     zero_click_sso:
+      admin:
+        attribute: "Item"
+        attributes:
+          attempt_for_all_providers: "What about for `noisy` providers?"
+          local_logins_enabled: "Are local logins disabled?"
+          plugin_enabled: "Is the plugin enabled?"
+          single_sso: "Is there a single enabled SSO provider?"
+        bad: "Nope :("
+        good: "Yep!"
+        info:
+          ready_prefix: "You've configured the Zero-Click SSO plugin to log in users automagically with"
+          ready_suffix: "!"
+          nearly_ready_prefix: "You've nearly configured the Zero-Click SSO plugin to log in users automagically with"
+          nearly_ready_suffix: ". You just need to enable the plugin setting for `noisy` providers. So close!"
+          not_ready: "Hmm. The Zero-Click SSO plugin is not currently configured to log in users automagically. Take a look at the checklist and see if you need to toggle a setting or edit an SSO provider. I believe in you!"
+        value: "✔"
+        title: "Plugin Checklist"
       title: "Zero-Click SSO"
       status: "Status"

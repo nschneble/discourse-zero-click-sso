@@ -1,7 +1,19 @@
 import RouteTemplate from "ember-route-template";
 import DBreadcrumbsItem from "discourse/components/d-breadcrumbs-item";
 import DPageSubheader from "discourse/components/d-page-subheader";
+import { htmlSafe } from "@ember/template";
 import { i18n } from "discourse-i18n";
+import { and, not, or } from "truth-helpers";
+
+function statusLabel(value) {
+  return htmlSafe(
+    `<span class="zero-click-sso-status-badge ${value ? "good-value" : "bad-value"}">${
+      value
+        ? I18n.t("zero_click_sso.admin.good")
+        : I18n.t("zero_click_sso.admin.bad")
+    }</span>`
+  );
+}
 
 export default RouteTemplate(
   <template>
@@ -11,46 +23,72 @@ export default RouteTemplate(
     />
 
     <div class="zero-click-sso__status admin-detail">
-      <DPageSubheader @titleLabel={{i18n "zero_click_sso.status"}} />
+      <DPageSubheader @titleLabel={{i18n "zero_click_sso.admin.title"}} />
+      <div class="zero-click-sso-status-attributes">
+        {{#if @model}}
+          <table>
+            <thead>
+              <th>{{i18n "zero_click_sso.admin.value"}}</th>
+              <th>{{i18n "zero_click_sso.admin.attribute"}}</th>
+            </thead>
 
-      {{#if @controller.siteSettings.zero_click_sso_enabled}}
-        {{#if
-          @controller.siteSettings.zero_click_sso_enabled_for_noisy_providers
-        }}
-          <p
-            style="background-color: darkgreen; color: white; padding: 8px 12px;"
-          >
-            <em>Enabled for all providers</em>
-          </p>
-        {{else}}
-          <p
-            style="background-color: darkgoldenrod; color: white; padding: 8px 12px;"
-          >
-            <em>Enabled for silent providers</em>
-          </p>
+            <tbody>
+              <tr>
+                <td>{{statusLabel @model.plugin_enabled}}</td>
+                <td>{{i18n
+                    "zero_click_sso.admin.attributes.plugin_enabled"
+                  }}</td>
+              </tr>
+              {{#unless (or @model.no_prompt (not @model.single_sso))}}
+                <tr>
+                  <td>{{statusLabel @model.attempt_for_all_providers}}</td>
+                  <td>{{i18n
+                      "zero_click_sso.admin.attributes.attempt_for_all_providers"
+                    }}</td>
+                </tr>
+              {{/unless}}
+              <tr>
+                <td>{{statusLabel (not @model.local_logins_enabled)}}</td>
+                <td>{{i18n
+                    "zero_click_sso.admin.attributes.local_logins_enabled"
+                  }}</td>
+              </tr>
+              <tr>
+                <td>{{statusLabel @model.single_sso}}</td>
+                <td>{{i18n "zero_click_sso.admin.attributes.single_sso"}}</td>
+              </tr>
+            </tbody>
+          </table>
         {{/if}}
-      {{else}}
-        <p style="background-color: darkred; color: white; padding: 8px 12px;">
-          <em>Disabled</em>
-        </p>
-      {{/if}}
 
-      {{#if @model}}
-        <div class="admin-config-page__main-area">
-          <dl class="pairs">
-            <dt>Plugin enabled</dt><dd>{{@model.plugin_enabled}}</dd>
-            <dt>attempt_for_all_providers</dt><dd
-            >{{@model.attempt_for_all_providers}}</dd>
-            <dt>Local logins enabled</dt><dd
-            >{{@model.local_logins_enabled}}</dd>
-            <dt>Enabled authenticators</dt><dd
-            >{{@model.enabled_authenticators}}</dd>
-            <dt>Single SSO</dt><dd>{{@model.single_sso}}</dd>
-            <dt>Provider</dt><dd>{{@model.provider}}</dd>
-            <dt>Silent-capable</dt><dd>{{@model.no_prompt}}</dd>
-          </dl>
+        <div class="zero-click-sso-info">
+          {{#if
+            (and
+              @model.plugin_enabled
+              (not @model.local_logins_enabled)
+              @model.single_sso
+            )
+          }}
+            {{#if (or @model.no_prompt @model.attempt_for_all_providers)}}
+              <p class="ready">{{i18n "zero_click_sso.admin.info.ready_prefix"}}
+                {{@model.provider}}{{i18n
+                  "zero_click_sso.admin.info.ready_suffix"
+                }}</p>
+            {{else}}
+              <p class="nearly-ready">{{i18n
+                  "zero_click_sso.admin.info.nearly_ready_prefix"
+                }}
+                {{@model.provider}}{{i18n
+                  "zero_click_sso.admin.info.nearly_ready_suffix"
+                }}</p>
+            {{/if}}
+          {{else}}
+            <p class="not-ready">{{i18n
+                "zero_click_sso.admin.info.not_ready"
+              }}</p>
+          {{/if}}
         </div>
-      {{/if}}
+      </div>
     </div>
   </template>
 );

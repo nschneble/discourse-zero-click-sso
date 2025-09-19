@@ -9,6 +9,8 @@
 
 enabled_site_setting :zero_click_sso_enabled
 
+register_asset "stylesheets/common/zero-click-sso.scss"
+
 add_admin_route "zero_click_sso.title", "zero-click-sso", use_new_show_route: true
 
 module ::ZeroClickSso

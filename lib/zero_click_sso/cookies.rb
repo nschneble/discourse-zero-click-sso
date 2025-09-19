@@ -2,7 +2,7 @@
 
 module ::ZeroClickSso
   module Cookies
-    COOKIE_NAME = :zero_click_sso
+    COOKIE_NAME = :_zero_click_sso
     COOKIE_PATH = "/"
 
     def self.opt_out(cookies, ttl: 1.hour)
