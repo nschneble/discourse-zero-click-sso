@@ -39,7 +39,7 @@ export default RouteTemplate(
                     "zero_click_sso.admin.attributes.plugin_enabled"
                   }}</td>
               </tr>
-              {{#unless (or @model.no_prompt (not @model.single_sso))}}
+              {{#unless (or @model.no_prompt (not @model.single_sso))}} // eslint-disable-line MaxHelpers
                 <tr>
                   <td>{{statusLabel @model.attempt_for_all_providers}}</td>
                   <td>{{i18n
