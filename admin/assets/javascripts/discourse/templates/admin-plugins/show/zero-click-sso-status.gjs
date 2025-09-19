@@ -70,16 +70,14 @@ export default RouteTemplate(
             )
           }}
             {{#if (or @model.no_prompt @model.attempt_for_all_providers)}}
-              <p class="ready">{{i18n "zero_click_sso.admin.info.ready_prefix"}}
-                {{@model.provider}}{{i18n
-                  "zero_click_sso.admin.info.ready_suffix"
+              <p class="ready">{{i18n
+                  "zero_click_sso.admin.info.ready"
+                  provider=@model.provider
                 }}</p>
             {{else}}
               <p class="nearly-ready">{{i18n
-                  "zero_click_sso.admin.info.nearly_ready_prefix"
-                }}
-                {{@model.provider}}{{i18n
-                  "zero_click_sso.admin.info.nearly_ready_suffix"
+                  "zero_click_sso.admin.info.nearly_ready"
+                  provider=@model.provider
                 }}</p>
             {{/if}}
           {{else}}

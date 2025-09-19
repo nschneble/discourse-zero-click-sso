@@ -16,10 +16,8 @@ en:
         bad: "Nope :("
         good: "Yep!"
         info:
-          ready_prefix: "You've configured the Zero-Click SSO plugin to log in users automagically with"
-          ready_suffix: "!"
-          nearly_ready_prefix: "You've nearly configured the Zero-Click SSO plugin to log in users automagically with"
-          nearly_ready_suffix: ". You just need to enable the plugin setting for `noisy` providers. So close!"
+          ready: "You've configured the Zero-Click SSO plugin to log in users automagically with %{provider}!"
+          nearly_ready: "You've nearly configured the Zero-Click SSO plugin to log in users automagically with %{provider}. You just need to enable the plugin setting for `noisy` providers. So close!"
           not_ready: "Hmm. The Zero-Click SSO plugin is not currently configured to log in users automagically. Take a look at the checklist and see if you need to toggle a setting or edit an SSO provider. I believe in you!"
         value: "✔"
         title: "Plugin Checklist"
