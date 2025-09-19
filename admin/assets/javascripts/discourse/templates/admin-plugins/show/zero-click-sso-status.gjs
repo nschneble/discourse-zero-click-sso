@@ -39,9 +39,12 @@ export default RouteTemplate(
         <div class="admin-config-page__main-area">
           <dl class="pairs">
             <dt>Plugin enabled</dt><dd>{{@model.plugin_enabled}}</dd>
-            <dt>attempt_for_all_providers</dt><dd>{{@model.attempt_for_all_providers}}</dd>
-            <dt>Local logins enabled</dt><dd>{{@model.local_logins_enabled}}</dd>
-            <dt>Enabled authenticators</dt><dd>{{@model.enabled_authenticators}}</dd>
+            <dt>attempt_for_all_providers</dt><dd
+            >{{@model.attempt_for_all_providers}}</dd>
+            <dt>Local logins enabled</dt><dd
+            >{{@model.local_logins_enabled}}</dd>
+            <dt>Enabled authenticators</dt><dd
+            >{{@model.enabled_authenticators}}</dd>
             <dt>Single SSO</dt><dd>{{@model.single_sso}}</dd>
             <dt>Provider</dt><dd>{{@model.provider}}</dd>
             <dt>Silent-capable</dt><dd>{{@model.no_prompt}}</dd>
