@@ -47,7 +47,7 @@ RSpec.describe "Zero-Click SSO", type: :system do
 
       # simulates failure + ensures the opt-out cookie is created
       visit "/zero_click_sso/failure?origin=/"
-      page.execute_script("document.cookie = 'zero_click_sso=1; path=/'")
+      page.execute_script("document.cookie = '_zero_click_sso=1; path=/'")
 
       visit "/"
       expect(page).to have_current_path("/")
@@ -59,7 +59,7 @@ RSpec.describe "Zero-Click SSO", type: :system do
 
       # simulates failure + ensures the opt-out cookie is created
       visit "/zero_click_sso/failure?origin=/"
-      page.execute_script("document.cookie = 'zero_click_sso=1; path=/'")
+      page.execute_script("document.cookie = '_zero_click_sso=1; path=/'")
 
       visit "/"
       expect(page).to have_current_path("/")
