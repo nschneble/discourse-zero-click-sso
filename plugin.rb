@@ -9,6 +9,8 @@
 
 enabled_site_setting :zero_click_sso_enabled
 
+add_admin_route "zero_click_sso.title", "zero-click-sso", use_new_show_route: true
+
 module ::ZeroClickSso
   PLUGIN_NAME = "zero-click-sso"
 end

@@ -6,4 +6,5 @@ en:
           zero_click_sso: "Zero-Click SSO"
   js:
     zero_click_sso:
-      placeholder: placeholder
+      title: "Zero-Click SSO"
+      status: "Status"
