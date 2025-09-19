@@ -39,14 +39,15 @@ export default RouteTemplate(
                     "zero_click_sso.admin.attributes.plugin_enabled"
                   }}</td>
               </tr>
-              {{#unless (or @model.no_prompt (not @model.single_sso))}} // eslint-disable-line MaxHelpers
+              {{! template-lint-disable-next-line simple-unless}}
+              {{#if (and (not @model.no_prompt) @model.single_sso)}}
                 <tr>
                   <td>{{statusLabel @model.attempt_for_all_providers}}</td>
                   <td>{{i18n
                       "zero_click_sso.admin.attributes.attempt_for_all_providers"
                     }}</td>
                 </tr>
-              {{/unless}}
+              {{/if}}
               <tr>
                 <td>{{statusLabel (not @model.local_logins_enabled)}}</td>
                 <td>{{i18n
