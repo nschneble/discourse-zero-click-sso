@@ -1,39 +1,35 @@
-.zero-click-sso-status-attributes td {
-  padding-top: 1rem !important;
-  padding-bottom: 1rem !important;
+.zero-click-sso-status-attributes td.zero-click-sso-status-attribute {
+  padding-top: var(--space-4);
+  padding-bottom: var(--space-4);
 }
 
 .zero-click-sso-status-badge {
-  padding: 0.5rem 1rem;
-  border-radius: 0.75rem;
+  padding: var(--space-2) var(--space-4);
+  border-radius: var(--d-border-radius);
 }
 
 .zero-click-sso-good-value {
-  background-color: darkgreen;
+  background-color: var(--success);
 }
 
 .zero-click-sso-bad-value {
-  background-color: darkred;
+  background-color: var(--danger);
 }
 
-.zero-click-sso-info {
-  margin: 2rem !important;
+.zero-click-sso-info p {
+  padding: var(--space-4);
+  margin: var(--space-8);
+  border-radius: var(--d-border-radius);
 }
 
 .zero-click-sso-ready {
-  background-color: darkgreen;
-  padding: 1rem !important;
-  border-radius: 0.75rem;
+  background-color: var(--success);
 }
 
 .zero-click-sso-nearly-ready {
-  background-color: darkgoldenrod;
-  padding: 1rem !important;
-  border-radius: 0.75rem;
+  background-color: color-mix(in srgb, var(--success), var(--danger));
 }
 
 .zero-click-sso-not-ready {
-  background-color: darkred;
-  padding: 1rem !important;
-  border-radius: 0.75rem;
+  background-color: var(--danger);
 }
