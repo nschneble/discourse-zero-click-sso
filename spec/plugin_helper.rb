@@ -8,13 +8,14 @@ module ZeroClickSsoHelpers
     allow(Discourse).to receive(:enabled_authenticators).and_return([authenticator])
   end
 
-  def enable_plugin!(enable_for_noisy_providers: false)
+  def enable_plugin!(enable_for_noisy_providers: false, consider_custom_providers_silently: false)
     # Discourse site settings
     SiteSetting.enable_local_logins = false
 
     # zero-click SSO plugin settings
     SiteSetting.zero_click_sso_enabled = true
     SiteSetting.zero_click_sso_enabled_for_noisy_providers = enable_for_noisy_providers
+    SiteSetting.zero_click_sso_consider_custom_providers_silently = consider_custom_providers_silently
   end
 
   def forum_session_cookie_key

@@ -24,9 +24,11 @@ module ::ZeroClickSso
     ]
 
     def self.configured_properly?
-      SiteSetting.zero_click_sso_enabled &&
-      !SiteSetting.enable_local_logins &&
-      Discourse.enabled_authenticators.one?
+      return false unless Discourse.enabled_authenticators.one?
+      return false unless SiteSetting.zero_click_sso_enabled
+      return false if SiteSetting.enable_local_logins
+
+      true
     end
 
     def self.provider_name
@@ -34,7 +36,15 @@ module ::ZeroClickSso
     end
 
     def self.no_prompt?
-      NO_PROMPT_AUTHENTICATORS.include?(provider_name)
+      NO_PROMPT_AUTHENTICATORS.include?(provider_name) || (custom_provider? &&
+        SiteSetting.zero_click_sso_consider_custom_providers_silently)
+    end
+
+    def self.custom_provider?
+      return false if NO_PROMPT_AUTHENTICATORS.include?(provider_name)
+      return false if THE_LESS_CONSIDERATE_AUTHENTICATORS.include?(provider_name)
+
+      true
     end
 
     def self.try_em_all?

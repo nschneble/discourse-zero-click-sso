@@ -65,4 +65,54 @@ RSpec.describe "Zero-Click SSO", type: :system do
       expect(page).to have_current_path("/")
     end
   end
+
+  context "when the provider is known and silent" do
+    it "sends prompt=none in the authentication request" do
+      enable_plugin!
+      mock_single_enabled_authenticator!(:apple)
+
+      visit "/"
+
+      expect(page.current_path).to match(%r{\A/auth/apple(\?.*)?\z})
+      expect(page.current_url).to include("prompt=none")
+    end
+  end
+
+  context "when the provider is known and noisy" do
+    it "omits prompt= from the authentication request" do
+      enable_plugin!(enable_for_noisy_providers: true)
+      mock_single_enabled_authenticator!(:github)
+
+      visit "/"
+
+      expect(page.current_path).to match(%r{\A/auth/github(\?.*)?\z})
+      expect(page.current_url).not_to include("prompt=")
+    end
+  end
+
+  context "when the provider is custom" do
+    context "and consider_custom_providers_silently is true" do
+      it "sends prompt=none in the authentication request" do
+        enable_plugin!(consider_custom_providers_silently: true)
+        mock_single_enabled_authenticator!(:custom)
+
+        visit "/"
+
+        expect(page.current_path).to match(%r{\A/auth/custom(\?.*)?\z})
+        expect(page.current_url).to include("prompt=none")
+      end
+    end
+
+    context "and consider_custom_providers_silently is false" do
+      it "omits prompt= from the authentication request" do
+        enable_plugin!(enable_for_noisy_providers: true)
+        mock_single_enabled_authenticator!(:custom)
+
+        visit "/"
+
+        expect(page.current_path).to match(%r{\A/auth/custom(\?.*)?\z})
+        expect(page.current_url).not_to include("prompt=")
+      end
+    end
+  end
 end
